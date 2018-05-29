@@ -7,7 +7,7 @@ Created on 4. sep. 2017
 # with different time periods from ROMS
 # extracts data from one station 
 # combines all time steps and writes to new netcdf 
-# z recalculated to meters from sigmas 
+
 
 import os, time
 from netCDF4 import MFDataset,Dataset #,num2date,date2num
@@ -18,12 +18,7 @@ import warnings
 # coordinates of needed station 
 #73N 17E, 75N 15E ,58N 11E 
 
-path =  ['X:/SODA3.3.1/OCEAN/soda3.3.1_mn_ocean_reg_2010.nc',
-     'X:/SODA3.3.1/OCEAN/soda3.3.1_mn_ocean_reg_2011.nc',
-     'X:/SODA3.3.1/OCEAN/soda3.3.1_mn_ocean_reg_2012.nc',
-     'X:/SODA3.3.1/OCEAN/soda3.3.1_mn_ocean_reg_2013.nc',
-     'X:/SODA3.3.1/OCEAN/soda3.3.1_mn_ocean_reg_2014.nc',
-     'X:/SODA3.3.1/OCEAN/soda3.3.1_mn_ocean_reg_2015.nc']
+path =  ['''add files here ''']
 
 f = MFDataset(path)
 latitude = np.array(f.variables['latitude'])
