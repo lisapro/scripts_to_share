@@ -13,7 +13,7 @@ import datetime
 import numpy as np
 import matplotlib.gridspec as gridspec
 import json    
-path = r'C:\Users\elp\OneDrive\Python_workspace\pyniva\niva-service-account.json'
+path = r'niva-service-account.json'
 header = token2header(path)
 meta_host = PUB_META
 tsb_host = PUB_TSB
@@ -23,7 +23,7 @@ def query(vess_name,fname):
     vessel_list = [v for v in Vessel.list(meta_host, header=header) if hasattr(v, "imo")] #
     v = [v for v in vessel_list if v.name == vess_name][0]  
     signals = v.get_all_tseries(meta_host, header=header)       
-    print (len(signals),'len signals') 
+
     interesting_signals = ['gpstrack','ctd_salinity'] #'ctd_temperature','ctd_salinity',, 'chla_fluorescence'
     i_signals = [ts for sn in interesting_signals for ts in signals if sn in ts.name]    
     df = TimeSeries.get_timeseries_list(PUB_TSB, i_signals, header=header, ts="P9M", 
