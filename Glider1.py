@@ -13,7 +13,7 @@ import datetime
 import numpy as np
 import matplotlib.gridspec as gridspec
 import json    
-
+path = r'C:\Users\elp\OneDrive\Python_workspace\pyniva\niva-service-account.json'
 header = token2header(path)
 meta_host = PUB_META
 tsb_host = PUB_TSB
@@ -26,7 +26,7 @@ def query(vess_name,fname):
     print (len(signals),'len signals') 
     interesting_signals = ['gpstrack','ctd_salinity'] #'ctd_temperature','ctd_salinity',, 'chla_fluorescence'
     i_signals = [ts for sn in interesting_signals for ts in signals if sn in ts.name]    
-    df = TimeSeries.get_timeseries_list(PUB_TSB, i_signals, header=header, ts="P8M", 
+    df = TimeSeries.get_timeseries_list(PUB_TSB, i_signals, header=header, ts="P9M", 
                                         dt=0, name_headers=True)        
     df.to_csv(fname)
     
@@ -50,7 +50,7 @@ def plot():
     df_tf_temp = df_tf_temp[df_tf_temp.latitude > 67.5]
     df_tf_temp = df_tf_temp[df_tf_temp.latitude < 69.5]     
     
-    fig = plt.figure(figsize=(12.27,5.27), dpi=100)
+    fig = plt.figure(figsize=(11.27,5.27), dpi=100)
 
     ax = plt.subplot2grid((3, 2), (0, 0), rowspan  = 3)
     ax1 = plt.subplot2grid((3, 2), (0, 1), rowspan = 1)    
@@ -75,7 +75,7 @@ def plot():
     map.drawparallels(parallels, labels = [1,1,0,0]) # draw parallels
     map.drawmeridians(meridians, labels = [0,0,1,1]) # draw parallels
     map.scatter(df_tf.longitude.values,df_tf.latitude.values,latlon = True,
-                s = 15,ax = ax ,zorder = 5,c='#1e5e75', alpha = 0.7,label = 'TrollFjord Ferry') #) 
+                s = 15,ax = ax ,zorder = 5,c='#1e5e75', alpha = 0.7,label = 'TrollFjord \nFerry') #) 
     
     df_tf = df_tf.set_index('time')    
     df_tf.index= pd.to_datetime(df_tf.index)    
@@ -164,7 +164,7 @@ def plot():
     for a in axes: 
         a.xaxis.set_major_formatter(Fmt)
         a.legend()    
-    
+    plt.tight_layout()
     #plt.show()
     plt.savefig('TF_Ferrybox.png')
 
